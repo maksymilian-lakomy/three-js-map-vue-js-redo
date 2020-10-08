@@ -12,14 +12,6 @@
     <ul>
       <li>
         <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
           target="_blank"
           rel="noopener"
@@ -32,14 +24,6 @@
           target="_blank"
           rel="noopener"
           >eslint</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-mocha"
-          target="_blank"
-          rel="noopener"
-          >unit-mocha</a
         >
       </li>
     </ul>
@@ -103,11 +87,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Options, Vue } from "vue-class-component";
 
-@Component
+@Options({
+  props: {
+    msg: String
+  }
+})
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+  msg!: string;
 }
 </script>
 

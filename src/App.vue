@@ -1,15 +1,49 @@
 <template>
-<v-map />
+<v-map :mapOptions="map" />
 </template>
 
 <script lang="ts">
+import {
+    MapOptions
+} from "@/models";
+
 import {
     Options,
     Vue
 } from "vue-class-component";
 
 @Options({})
-export default class App extends Vue {}
+export default class App extends Vue {
+    map: MapOptions = {
+        vertices: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        },
+        tileOptions: {
+            inColumn: 4,
+            paths: [
+                require("@/assets/sample-map/image-01-04.png"),
+                require("@/assets/sample-map/image-02-04.png"),
+                require("@/assets/sample-map/image-03-04.png"),
+                require("@/assets/sample-map/image-04-04.png"),
+                require("@/assets/sample-map/image-01-03.png"),
+                require("@/assets/sample-map/image-02-03.png"),
+                require("@/assets/sample-map/image-03-03.png"),
+                require("@/assets/sample-map/image-04-03.png"),
+                require("@/assets/sample-map/image-01-02.png"),
+                require("@/assets/sample-map/image-02-02.png"),
+                require("@/assets/sample-map/image-03-02.png"),
+                require("@/assets/sample-map/image-04-02.png"),
+                require("@/assets/sample-map/image-01-01.png"),
+                require("@/assets/sample-map/image-02-01.png"),
+                require("@/assets/sample-map/image-03-01.png"),
+                require("@/assets/sample-map/image-04-01.png")
+            ]
+        }
+    };
+}
 </script>
 
 <style lang="scss">

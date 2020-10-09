@@ -17,6 +17,10 @@ export function EventEmitter<T extends Constructor>(Base: T) {
       index !== -1 && this.listeners.splice(index, 1);
     }
 
+    public removeAllListeners(): void {
+      this.listeners = [];
+    }
+
     protected notify(eventName: string, event: Event): void {
       this.listeners.forEach(
         ({ listener: _listener, eventName: _eventName }) =>

@@ -5,9 +5,10 @@ export class CameraMovementAction extends Action {
   constructor(
     scene: Scene,
     camera: OrthographicCamera,
-    renderer: WebGLRenderer
+    renderer: WebGLRenderer,
+    container: HTMLElement
   ) {
-    super(scene, camera, renderer);
+    super(scene, camera, renderer, container);
 
     addEventListener("mousedown", this.onMouseDown.bind(this));
     addEventListener("mousemove", this.onMouseMove.bind(this));

@@ -1,6 +1,6 @@
 import { OrthographicCamera, Scene, Vector2, WebGLRenderer } from "three";
-import { CameraFrustum, MapOptions } from "@/models";
-import { mapMeshFactory } from "@/helpers";
+import { MapOptions } from "@/models";
+import { cameraFrustum, mapMeshFactory } from "@/helpers";
 import { Action, ActionType } from "./actions";
 
 export class Map {
@@ -15,7 +15,7 @@ export class Map {
   public constructor(private container: HTMLElement) {
     this.scene = new Scene();
 
-    const { left, right, top, bottom, near, far } = this.cameraFrustum;
+    const { left, right, top, bottom, near, far } = cameraFrustum(container);
     this.camera = new OrthographicCamera(left, right, top, bottom, near, far);
     this.camera.position.set(400, 500, 10);
 
@@ -26,25 +26,11 @@ export class Map {
 
     Map.actions.forEach((action) => {
       this.registeredActions.push(
-        new action(this.scene, this.camera, this.renderer)
+        new action(this.scene, this.camera, this.renderer, this.container)
       );
     });
 
     this.container.appendChild(this.renderer.domElement);
-  }
-
-  private get cameraFrustum(): CameraFrustum {
-    const width = this.container.offsetWidth;
-    const height = this.container.offsetHeight;
-
-    return {
-      left: width / -2,
-      right: width / 2,
-      top: height / 2,
-      bottom: height / -2,
-      near: 1,
-      far: 1000,
-    };
   }
 
   private get size(): Vector2 {

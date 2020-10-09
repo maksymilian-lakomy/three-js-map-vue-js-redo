@@ -12,9 +12,10 @@ export class CameraZoomAction extends Action {
   constructor(
     scene: Scene,
     camera: OrthographicCamera,
-    renderer: WebGLRenderer
+    renderer: WebGLRenderer,
+    container: HTMLElement
   ) {
-    super(scene, camera, renderer);
+    super(scene, camera, renderer, container);
 
     addEventListener("mousemove", this.onMouseMove.bind(this));
     addEventListener("wheel", this.onWheel.bind(this));

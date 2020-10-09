@@ -1,11 +1,4 @@
-import {
-  OrthographicCamera,
-  Raycaster,
-  Scene,
-  Vector2,
-  Vector3,
-  WebGLRenderer,
-} from "three";
+import { OrthographicCamera, Scene, Vector3, WebGLRenderer } from "three";
 import { Action } from "./index";
 
 export class CameraMovementAction extends Action {
@@ -36,10 +29,12 @@ export class CameraMovementAction extends Action {
     }
 
     const mousePosition = new Vector3(-event.clientX, event.clientY, 0);
-    this.destinationPosition = this.startCameraPosition
+    const difference = mousePosition
       .clone()
-      .add(mousePosition)
-      .sub(this.startPosition);
+      .sub(this.startPosition)
+      .divideScalar(this.camera.zoom);
+
+    this.destinationPosition = this.startCameraPosition.clone().add(difference);
   }
 
   private onMouseUp(): void {

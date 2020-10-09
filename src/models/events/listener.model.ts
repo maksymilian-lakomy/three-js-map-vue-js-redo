@@ -1,3 +1,10 @@
 import { Event } from "./event.model";
 
-export type Listener = (event: Event) => void;
+type Listener = (event: Event) => void;
+
+export type { Listener };
+
+export interface ListenerData {
+  eventName: string;
+  listener: Listener;
+}

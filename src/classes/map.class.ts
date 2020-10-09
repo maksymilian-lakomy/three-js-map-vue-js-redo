@@ -1,9 +1,9 @@
 import { OrthographicCamera, Scene, Vector2, WebGLRenderer } from "three";
-import { MapOptions } from "@/models";
-import { cameraFrustum, mapMeshFactory } from "@/helpers";
+import { Event, Listener, ListenerData, MapOptions, Subject } from "@/models";
+import { cameraFrustum, findEventListener, mapMeshFactory } from "@/helpers";
 import { Action, ActionType } from "./actions";
 
-export class Map {
+export class Map implements Subject {
   public static actions: ActionType[] = [];
 
   public scene: Scene;
@@ -11,6 +11,7 @@ export class Map {
   public renderer: WebGLRenderer;
 
   private registeredActions: Action[] = [];
+  private listeners: ListenerData[] = [];
 
   public constructor(private container: HTMLElement) {
     this.scene = new Scene();
@@ -24,12 +25,7 @@ export class Map {
     const { x: width, y: height } = this.size;
     this.renderer.setSize(width, height);
 
-    Map.actions.forEach((action) => {
-      this.registeredActions.push(
-        new action(this.scene, this.camera, this.renderer, this.container)
-      );
-    });
-
+    this.registerActions();
     this.container.appendChild(this.renderer.domElement);
   }
 
@@ -43,7 +39,38 @@ export class Map {
 
   public render(): void {
     this.registeredActions.forEach((action) => action.action());
-
     this.renderer.render(this.scene, this.camera);
+  }
+
+  private registerActions(): void {
+    Map.actions.forEach((_action) =>
+      this.registeredActions.push(
+        new _action(this.scene, this.camera, this.renderer, this.container)
+      )
+    );
+
+    this.registeredActions.forEach((_action) =>
+      _action.events.forEach((_eventName) =>
+        _action.addEventListener(_eventName, (event) => {
+          this.notify(_eventName, event);
+        })
+      )
+    );
+  }
+
+  public addEventListener(eventName: string, listener: Listener): void {
+    const index = findEventListener(this.listeners, eventName, listener);
+    index === -1 && this.listeners.push({ eventName, listener });
+  }
+
+  public removeEventListener(eventName: string, listener: Listener): void {
+    const index = findEventListener(this.listeners, eventName, listener);
+    index !== -1 && this.listeners.splice(index, 1);
+  }
+
+  private notify(eventName: string, event: Event): void {
+    this.listeners.forEach(({ listener: _listener, eventName: _eventName }) => {
+      _eventName === eventName && _listener(event);
+    });
   }
 }

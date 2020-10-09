@@ -9,6 +9,8 @@ import {
 import { Action } from "./index";
 
 export class CameraZoomAction extends Action {
+  public readonly events = [];
+
   constructor(
     scene: Scene,
     camera: OrthographicCamera,

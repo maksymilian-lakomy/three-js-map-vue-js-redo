@@ -1,7 +1,10 @@
 import { OrthographicCamera, Scene, Vector3, WebGLRenderer } from "three";
+import { CameraMoveEvent } from "./action.events";
 import { Action } from "./index";
 
 export class CameraMovementAction extends Action {
+  public readonly events = ['startcameramove', 'endcameramove', 'cameramove'];
+
   constructor(
     scene: Scene,
     camera: OrthographicCamera,
@@ -22,6 +25,8 @@ export class CameraMovementAction extends Action {
   private onMouseDown(event: MouseEvent): void {
     this.startPosition = new Vector3(-event.clientX, event.clientY, 0);
     this.startCameraPosition = this.camera.position.clone();
+
+    this.notify("startcameramove", {});
   }
 
   private onMouseMove(event: MouseEvent): void {
@@ -42,6 +47,8 @@ export class CameraMovementAction extends Action {
     this.startPosition = null;
     this.startCameraPosition = null;
     this.destinationPosition = null;
+
+    this.notify("endcameramove", {});
   }
 
   public action(): void {
@@ -54,6 +61,12 @@ export class CameraMovementAction extends Action {
       this.destinationPosition.y,
       this.destinationPosition.z
     );
+
+    const event: CameraMoveEvent = {
+      cameraPosition: this.camera.position.clone(),
+    };
+
+    this.notify("cameramove", event);
   }
 
   public destroy(): void {

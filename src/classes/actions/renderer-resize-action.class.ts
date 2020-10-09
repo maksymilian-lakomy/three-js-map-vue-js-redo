@@ -4,6 +4,8 @@ import { cameraFrustum } from "@/helpers";
 import { CameraFrustum } from "@/models";
 
 export class RendererResizeAction extends Action {
+  public readonly events = [];
+
   public constructor(
     scene: Scene,
     camera: OrthographicCamera,

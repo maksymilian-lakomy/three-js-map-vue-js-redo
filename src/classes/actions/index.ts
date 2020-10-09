@@ -6,6 +6,7 @@ export * from "./action.class";
 export * from "./camera-movement-action.class";
 export * from "./camera-zoom-action.class";
 export * from "./renderer-resize-action.class";
+export * from "./action.events";
 
 export type ActionType =
   | typeof CameraMovementAction

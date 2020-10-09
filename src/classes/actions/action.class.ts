@@ -1,8 +1,11 @@
-import { Listener, Subject, Event } from "@/models";
+import { findEventListener } from '@/helpers';
+import type { Listener } from "@/models";
+import { Subject, Event, ListenerData } from "@/models";
 import { OrthographicCamera, Scene, WebGLRenderer } from "three";
 
 export abstract class Action implements Subject {
-  private listeners: { eventName: string; listener: Listener }[] = [];
+  private listeners: ListenerData[] = [];
+  public readonly abstract events: ReadonlyArray<string>; 
 
   public constructor(
     protected readonly scene: Scene,
@@ -16,24 +19,18 @@ export abstract class Action implements Subject {
   public abstract destroy(): void;
 
   public addEventListener(eventName: string, listener: Listener): void {
-    const index = this.listeners.find(
-      ({ listener: _listener, eventName: _eventName }) =>
-        _listener === listener && _eventName === eventName
-    );
-    !index && this.listeners.push({ eventName, listener });
+    const index = findEventListener(this.listeners, eventName, listener);
+    index === -1 && this.listeners.push({ eventName, listener });
   }
 
   public removeEventListener(eventName: string, listener: Listener): void {
-    const index = this.listeners.findIndex(
-      ({ listener: _listener, eventName: _eventName }) =>
-        _listener === listener && _eventName === eventName
-    );
-    index && this.listeners.splice(index, 1);
+    const index = findEventListener(this.listeners, eventName, listener);
+    index !== -1 && this.listeners.splice(index, 1);
   }
 
   protected notify(eventName: string, event: Event): void {
-    this.listeners.forEach((_listener) => {
-      _listener.eventName === eventName && _listener.listener(event);
-    });
+    this.listeners.forEach(({listener: _listener, eventName: _eventName}) => 
+      _eventName === eventName && _listener(event)
+    );
   }
 }

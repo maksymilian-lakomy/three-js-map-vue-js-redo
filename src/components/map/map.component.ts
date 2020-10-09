@@ -1,4 +1,9 @@
-import { Map } from "@/classes";
+import {
+  CameraMovementAction,
+  CameraZoomAction,
+  Map,
+  RendererResizeAction,
+} from "@/classes";
 import { MapOptions } from "@/models";
 import { defineComponent, onMounted, ref, PropType } from "vue";
 
@@ -14,7 +19,12 @@ const MapComponent = defineComponent({
     let map: Map;
 
     onMounted(() => {
-      mapWrapper.value && (map = new Map(mapWrapper.value));
+      mapWrapper.value &&
+        (map = new Map(mapWrapper.value, [
+          CameraMovementAction,
+          CameraZoomAction,
+          RendererResizeAction,
+        ]));
       map.setMap(props.mapOptions);
 
       const animate = () => {

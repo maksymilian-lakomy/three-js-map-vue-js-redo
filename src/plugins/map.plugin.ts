@@ -5,7 +5,6 @@ import MapComponent from "../components/map/map.component.vue";
 
 export default {
   install: (app: App) => {
-    Map.actions = [CameraMovementAction, CameraZoomAction, RendererResizeAction];
 
     app.component("v-map", MapComponent);
   },

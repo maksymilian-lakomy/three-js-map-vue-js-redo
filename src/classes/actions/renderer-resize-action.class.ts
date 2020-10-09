@@ -2,8 +2,9 @@ import { OrthographicCamera, Scene, WebGLRenderer } from "three";
 import { Action } from "./index";
 import { cameraFrustum } from "@/helpers";
 import { CameraFrustum } from "@/models";
+import { ExposedActions } from './action.class';
 
-export class RendererResizeAction extends Action {
+export class RendererResizeAction extends Action implements ExposedActions {
   public readonly events = [];
 
   public constructor(

@@ -1,9 +1,10 @@
 import { OrthographicCamera, Scene, Vector3, WebGLRenderer } from "three";
+import { ExposedAction } from "./action.class";
 import { CameraMoveEvent } from "./action.events";
 import { Action } from "./index";
 
-export class CameraMovementAction extends Action {
-  public readonly events = ['startcameramove', 'endcameramove', 'cameramove'];
+export class CameraMovementAction extends Action implements ExposedAction {
+  public readonly events = ["startcameramove", "endcameramove", "cameramove"];
 
   constructor(
     scene: Scene,

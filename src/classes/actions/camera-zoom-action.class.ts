@@ -2,13 +2,13 @@ import {
   MathUtils,
   OrthographicCamera,
   Scene,
-  Vector2,
   Vector3,
   WebGLRenderer,
 } from "three";
+import { ExposedAction } from './action.class';
 import { Action } from "./index";
 
-export class CameraZoomAction extends Action {
+export class CameraZoomAction extends Action implements ExposedAction {
   public readonly events = [];
 
   constructor(

@@ -1,4 +1,4 @@
-import { findEventListener } from "@/helpers";
+import { findEventListener } from "@/helpers/find-event-listener.helper";
 import { Event, Listener, ListenerData, Subject } from "@/models";
 
 type Constructor = new (...args: any[]) => {};

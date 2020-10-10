@@ -69,12 +69,10 @@ describe(EventEmitter.name, () => {
     eventEmitter.addEventListener(secondExpectedEventName, secondListener);
 
     eventEmitter.firstEmit();
+    eventEmitter.secondEmit();
 
     expect(firstListener).toHaveBeenCalledTimes(1);
     expect(firstListener).toHaveBeenCalledWith(expectedEvent);
-
-    eventEmitter.secondEmit();
-
     expect(secondListener).toHaveBeenCalledTimes(1);
     expect(secondListener).toHaveBeenCalledWith(expectedEvent);
   });

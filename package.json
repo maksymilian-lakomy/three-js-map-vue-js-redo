@@ -43,5 +43,7 @@
     "typescript": "~3.9.3"
   },
   "_id": "three-js-map-vue-js@0.1.0",
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

@@ -9,17 +9,14 @@ class BaseMap {
   public camera: OrthographicCamera;
   public renderer: WebGLRenderer;
 
-  public constructor(
-    protected container: HTMLElement,
-    renderer?: WebGLRenderer
-  ) {
+  public constructor(protected container: HTMLElement) {
     this.scene = new Scene();
 
     const { left, right, top, bottom, near, far } = cameraFrustum(container);
     this.camera = new OrthographicCamera(left, right, top, bottom, near, far);
-    this.camera.position.set(400, 500, 10);
+    this.camera.position.set(0, 0, 10);
 
-    this.renderer = renderer || new WebGLRenderer();
+    this.renderer = new WebGLRenderer();
 
     const { offsetWidth: width, offsetHeight: height } = this.container;
     this.renderer.setSize(width, height);
@@ -33,12 +30,8 @@ const EventEmmiterMap = EventEmitter(BaseMap);
 export class Map extends EventEmmiterMap {
   private actions: ExposedAction[] = [];
 
-  public constructor(
-    container: HTMLElement,
-    actions: ActionType[] = [],
-    renderer?: WebGLRenderer
-  ) {
-    super(container, renderer);
+  public constructor(container: HTMLElement, actions: ActionType[] = []) {
+    super(container);
     this.registerActions(actions);
   }
 

@@ -1,6 +1,6 @@
-import { Object3D, Vector2 } from 'three';
+import { Mesh, Vector2 } from 'three';
 
-export interface Marker {
-    visual: Object3D;
-    position: Vector2[];
+export interface MarkersData {
+    visual: Mesh;
+    positions: Vector2[];
 }

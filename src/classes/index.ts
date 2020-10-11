@@ -1,2 +1,2 @@
-export * from "./map.class";
+export * from "./map/map.class";
 export * from "./actions";

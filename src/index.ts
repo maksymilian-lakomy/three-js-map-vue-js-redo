@@ -1,9 +1,10 @@
 export {
   Map,
+  Markers,
   ExposedAction,
   Action,
   CameraMovementAction,
   CameraZoomAction,
-  RendererResizeAction
+  RendererResizeAction,
 } from "./classes/index";
-export { MapOptions, TileOptions } from "./models/index";
+export { MapOptions, TileOptions, MarkersData } from "./models/index";

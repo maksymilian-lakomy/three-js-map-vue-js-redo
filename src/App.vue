@@ -1,59 +1,59 @@
 <template>
-<v-map :mapOptions="map" />
+  <v-map :mapOptions="map" />
 </template>
 
 <script lang="ts">
-import {
-    MapOptions
-} from "@/models";
+import { MapOptions } from "@/models";
 
-import {
-    Options,
-    Vue
-} from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 
 @Options({})
 export default class App extends Vue {
-    map: MapOptions = {
-        vertices: {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0
-        },
-        tileOptions: {
-            inColumn: 4,
-            paths: [
-                require("@/assets/sample-map/image-01-04.png"),
-                require("@/assets/sample-map/image-02-04.png"),
-                require("@/assets/sample-map/image-03-04.png"),
-                require("@/assets/sample-map/image-04-04.png"),
-                require("@/assets/sample-map/image-01-03.png"),
-                require("@/assets/sample-map/image-02-03.png"),
-                require("@/assets/sample-map/image-03-03.png"),
-                require("@/assets/sample-map/image-04-03.png"),
-                require("@/assets/sample-map/image-01-02.png"),
-                require("@/assets/sample-map/image-02-02.png"),
-                require("@/assets/sample-map/image-03-02.png"),
-                require("@/assets/sample-map/image-04-02.png"),
-                require("@/assets/sample-map/image-01-01.png"),
-                require("@/assets/sample-map/image-02-01.png"),
-                require("@/assets/sample-map/image-03-01.png"),
-                require("@/assets/sample-map/image-04-01.png")
-            ]
-        }
-    };
+  map: MapOptions = {
+    vertices: {
+      left: 0,
+      right: 2000,
+      top: 0,
+      bottom: 2000,
+    },
+    size: 2000,
+    tileOptions: {
+      inColumn: 4,
+      proportions: {
+        horizontal: 1,
+        vertical: 1,
+      },
+      paths: [
+        require("@/assets/sample-map/image-01-04.png"),
+        require("@/assets/sample-map/image-02-04.png"),
+        require("@/assets/sample-map/image-03-04.png"),
+        require("@/assets/sample-map/image-04-04.png"),
+        require("@/assets/sample-map/image-01-03.png"),
+        require("@/assets/sample-map/image-02-03.png"),
+        require("@/assets/sample-map/image-03-03.png"),
+        require("@/assets/sample-map/image-04-03.png"),
+        require("@/assets/sample-map/image-01-02.png"),
+        require("@/assets/sample-map/image-02-02.png"),
+        require("@/assets/sample-map/image-03-02.png"),
+        require("@/assets/sample-map/image-04-02.png"),
+        require("@/assets/sample-map/image-01-01.png"),
+        require("@/assets/sample-map/image-02-01.png"),
+        require("@/assets/sample-map/image-03-01.png"),
+        require("@/assets/sample-map/image-04-01.png"),
+      ],
+    },
+  };
 }
 </script>
 
 <style lang="scss">
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #app {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

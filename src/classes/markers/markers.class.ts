@@ -1,4 +1,4 @@
-import { InstancedBufferGeometry, InstancedMesh, Object3D } from "three";
+import { InstancedMesh, Object3D } from "three";
 import { MarkersData } from "@/models";
 
 export class Markers {
@@ -33,7 +33,7 @@ export class Markers {
     const positioner = new Object3D();
 
     positions.forEach((position, i) => {
-      positioner.position.set(position.x, position.y, 0);
+      positioner.position.set(position.x, position.y, 1);
       positioner.updateMatrix();
       markersObject.setMatrixAt(i, positioner.matrix.clone());
     });

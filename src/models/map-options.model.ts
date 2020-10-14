@@ -6,6 +6,12 @@ export interface TileOptions {
 
   /** Provided in order from bottom left to top right */
   paths: TilePath[];
+
+  // TODO - CHANGE INTO MAP PROPORTIONS IN MAP OPTIONS
+  proportions: {
+    horizontal: number;
+    vertical: number;
+  };
 }
 
 export interface MapOptions {
@@ -17,5 +23,6 @@ export interface MapOptions {
     bottom: number;
   };
 
+  size: number;
   tileOptions: TileOptions;
 }

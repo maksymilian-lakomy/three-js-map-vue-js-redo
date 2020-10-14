@@ -30,9 +30,12 @@ const EventEmmiterMap = EventEmitter(BaseMap);
 
 export class Map extends EventEmmiterMap {
   private actions: ExposedAction[] = [];
-  private markers?: Markers;
+  private _markers?: Markers;
 
-  public constructor(container: HTMLElement, actions: readonly ActionType[] = []) {
+  public constructor(
+    container: HTMLElement,
+    actions: readonly ActionType[] = []
+  ) {
     super(container);
     this.registerActions(actions);
   }
@@ -54,7 +57,7 @@ export class Map extends EventEmmiterMap {
   }
 
   public async setMap(mapOptions: Readonly<MapOptions>) {
-    this.scene.add(await mapMeshFactory(mapOptions.tileOptions));
+    this.scene.add(await mapMeshFactory(mapOptions));
   }
 
   public render(): void {
@@ -62,17 +65,23 @@ export class Map extends EventEmmiterMap {
     this.renderer.render(this.scene, this.camera);
   }
 
+  public get markers(): Markers | undefined {
+    return this._markers;
+  }
+
   public initializeMarkers(): Markers {
     this.destroyMarkers();
 
-    this.markers = new Markers();
-    this.scene.add(this.markers.container);
+    this._markers = new Markers();
+    
+    // TODO - MOVE MARKERS INSIDE MAP CONTAINER FOR EASIER POSITIONING
+    this.scene.add(this._markers.container);
 
-    return this.markers;
+    return this._markers;
   }
 
   public destroyMarkers(): void {
-    this.markers && this.scene.remove(this.markers.container);
-    this.markers = undefined;
+    this._markers && this.scene.remove(this._markers.container);
+    this._markers = undefined;
   }
 }

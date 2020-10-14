@@ -3,8 +3,9 @@ import {
   CameraZoomAction,
   Map,
   RendererResizeAction,
-} from "@/classes";
-import { MapOptions } from "@/models";
+} from "../../classes";
+import { MapOptions } from "../../models";
+import { sampleMarkersFactory } from "../../helpers";
 import { defineComponent, onMounted, ref, PropType } from "vue";
 
 const MapComponent = defineComponent({
@@ -26,6 +27,12 @@ const MapComponent = defineComponent({
           RendererResizeAction,
         ]));
       map.setMap(props.mapOptions);
+
+      const markersPos = sampleMarkersFactory(props.mapOptions);
+
+      const markers = map.initializeMarkers();
+      
+      markers.addMarkers(markersPos);
 
       const animate = () => {
         map.render();

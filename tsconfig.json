@@ -20,8 +20,11 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "outDir": "dist"
   },
-  "include": [
-    "src/**/*.ts",
-  ],
-  "exclude": ["node_modules", "src/plugins/**/*", "src/components/**/*", "src/main.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "src/plugins/**/*",
+    "src/components/**/*",
+    "src/main.ts"
+  ]
 }

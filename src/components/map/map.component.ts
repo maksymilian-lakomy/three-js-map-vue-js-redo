@@ -19,16 +19,16 @@ const MapComponent = defineComponent({
     const mapWrapper = ref<HTMLElement | null>(null);
     let map: Map;
 
-    onMounted(() => {
+    onMounted(async () => {
       mapWrapper.value &&
         (map = new Map(mapWrapper.value, [
           CameraMovementAction,
           CameraZoomAction,
           RendererResizeAction,
         ]));
-      map.setMap(props.mapOptions);
+      await map.setMap(props.mapOptions);
 
-      const markersPos = sampleMarkersFactory(props.mapOptions);
+      const markersPos = await sampleMarkersFactory(props.mapOptions);
 
       const markers = map.initializeMarkers();
       

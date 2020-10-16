@@ -11,10 +11,10 @@ import { Options, Vue } from "vue-class-component";
 export default class App extends Vue {
   map: MapOptions = {
     vertices: {
-      left: 0,
-      right: 2000,
-      top: 0,
-      bottom: 2000,
+      left: -1305.40466,
+      right: 394.59537,
+      top: -289.79858,
+      bottom: -1989.79858,
     },
     size: 2000,
     tileOptions: {
